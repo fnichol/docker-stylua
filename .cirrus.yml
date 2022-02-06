@@ -1,0 +1,23 @@
+---
+check_task:
+  container:
+    image: fnichol/check-shell:latest
+  check_script: make check_task
+
+docker_builder:
+  only_if: $CIRRUS_TAG != ''
+  depends_on:
+    - check
+  env:
+    IMAGE_NAME: fnichol/stylua
+    # yamllint disable rule:line-length
+    DOCKER_USERNAME: ENCRYPTED[TODO]
+    DOCKER_PASSWORD: ENCRYPTED[TODO]
+    # yamllint enable rule:line-length
+  build_script: make build
+  login_script: >
+    echo "$DOCKER_PASSWORD" \
+      | docker login --username "$DOCKER_USERNAME" --password-stdin
+  push_script:
+    - docker push "$IMAGE_NAME:$(cat VERSION.txt)"
+    - docker push "$IMAGE_NAME:latest"
