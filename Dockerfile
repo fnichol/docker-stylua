@@ -3,6 +3,7 @@ ARG VERSION
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache gcc libc-dev
+# hadolint ignore=DL3059
 RUN cargo install stylua \
     --version "${VERSION}" --locked --all-features --verbose
 
