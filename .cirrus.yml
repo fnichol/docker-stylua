@@ -11,8 +11,8 @@ docker_builder:
   env:
     IMAGE_NAME: fnichol/stylua
     # yamllint disable rule:line-length
-    DOCKER_USERNAME: ENCRYPTED[TODO]
-    DOCKER_PASSWORD: ENCRYPTED[TODO]
+    DOCKER_USERNAME: ENCRYPTED[fe829da166acb207cb29aa5e06c236f76e786443e6e2fcd23d8890aef188da42d62e4ae60b05ae67ef3c8e9bb6cdc0f2]
+    DOCKER_PASSWORD: ENCRYPTED[17120adeb294a0fb9f174926c0366d9f9a94df8149b9193705a452a5e438c44f9258f275d492913a3f578d19182c894d]
     # yamllint enable rule:line-length
   build_script: make build
   login_script: >
