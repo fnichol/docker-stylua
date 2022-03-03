@@ -24,8 +24,22 @@ hadolint: ## Checks Dockerfiles for linting rules
 .PHONY: hadolint
 
 test:
+	@echo "--- $@"
+	@if [ -f /.dockerenv ]; then \
+		$(MAKE) version; \
+	else \
+		$(MAKE) build; \
+		docker run --rm -ti -v "$$(pwd):/src" -w /src \
+			$(IMAGE) sh -c 'apk add make && make test'; \
+	fi
 .PHONY: test
 
 update-toc: ## Update README.md table of contents
 	markdown-toc -i README.md
 .PHONY: update-toc
+
+version: ## Prints the version of key tool
+	@echo "--- $@"
+	@echo "  - StyLua version"
+	@stylua --version | sed 's/^/        /'
+.PHONY: version
