@@ -1,4 +1,4 @@
-FROM rust:1-alpine3.15 as builder
+FROM rust:1-alpine3.16 as builder
 ARG VERSION
 
 # hadolint ignore=DL3018
@@ -7,7 +7,7 @@ RUN apk add --no-cache gcc libc-dev
 RUN cargo install stylua \
     --version "${VERSION}" --locked --all-features --verbose
 
-FROM alpine:3.15
+FROM alpine:3.16
 
 ARG NAME
 ARG VERSION
